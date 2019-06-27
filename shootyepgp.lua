@@ -57,6 +57,17 @@ do
   end
 end
 local admincmd, membercmd = {type = "group", handler = sepgp, args = {
+    add = {
+      type = "text",
+      name = "Add EP",
+      desc = "Manually add EP to a single member.",
+      set  = function(name) 
+        sepgp:givename_ep(name, 50)
+      end,
+      get  = false,
+      usage = "<name>",
+      order = 15
+    },
     bids = {
       type = "execute",
       name = L["Bids"],
@@ -684,6 +695,7 @@ function sepgp:delayedInit()
     end
   end
   self:defaultPrint(string.format(L["v%s Loaded."],sepgp._versionString))
+  sepgp_standings:FileStandings()
 end
 
 function sepgp:AddDataToTooltip(tooltip,itemlink,itemstring,is_master)
@@ -1289,6 +1301,10 @@ function sepgp:award_reserve_ep(ep) -- awards ep to reserve list
     reserves_blacklist = {}
     self:refreshPRTablets()
   end
+end
+
+function sepgp:add_ep(getname) -- Award EP from txt cmd
+  self:addToLog('hey')
 end
 
 function sepgp:givename_ep(getname,ep) -- awards ep to a single character
