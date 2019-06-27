@@ -130,6 +130,28 @@ function sepgp_standings:Export()
   shooty_export.AddSelectText(txt)
 end
 
+function sepgp_standings:FileStandings()
+  local t = {}
+  for i = 1, GetNumGuildMembers(1) do
+    local name, _, _, _, class, _, note, officernote, _, _ = GetGuildRosterInfo(i)
+    local ep = (sepgp:get_ep_v3(name,officernote) or 0) 
+    local gp = (sepgp:get_gp_v3(name,officernote) or sepgp.VARS.basegp) 
+    if ep > 0 then
+      table.insert(t,{name,ep,gp,ep/gp})
+    end
+  end 
+  table.sort(t, function(a,b)
+      return tonumber(a[4]) > tonumber(b[4])
+    end)
+  local txt = "["
+  for i,val in ipairs(t) do
+    txt = txt .. "['" .. val[1] .. "', " .. val[2] .. ", " .. val[3] .. "],"
+  end
+  txt = string.sub(txt, 0,-1) -- remove trailing comma on last line
+  txt = txt .. "]";
+  shooty_filestandings = txt
+end
+
 function sepgp_standings:Import()
   if not IsGuildLeader() then return end
   shooty_export.action:Show()
@@ -498,4 +520,4 @@ function sepgp_standings:OnTooltipUpdate()
 end
 
 -- GLOBALS: sepgp_saychannel,sepgp_groupbyclass,sepgp_groupbyarmor,sepgp_groupbyrole,sepgp_raidonly,sepgp_decay,sepgp_minep,sepgp_reservechannel,sepgp_main,sepgp_progress,sepgp_discount,sepgp_log,sepgp_dbver,sepgp_looted
--- GLOBALS: sepgp,sepgp_prices,sepgp_standings,sepgp_bids,sepgp_loot,sepgp_reserves,sepgp_alts,sepgp_logs
+-- GLOBALS: sepgp,sepgp_prices,sepgp_standings,sepgp_bids,sepgp_loot,sepgp_reserves,sepgp_alts,sepgp_logs, shooty_filestandings
