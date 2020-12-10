@@ -59,8 +59,8 @@ end
 local admincmd, membercmd = {type = "group", handler = sepgp, args = {
     add = {
       type = "text",
-      name = "Add EP",
-      desc = "Manually add EP to a single member.",
+      name = L["Add EP"],
+      desc = L["Manually add EP to a single member."],
       set  = function(name) 
         sepgp:givename_ep(name, 50)
       end,
