@@ -3,6 +3,7 @@
 ## Title-zhCN: shootyepgp EPGP插件
 ## Notes: Effort Points/Gear Points Loot System
 ## Notes-zhCN: 贡献点/装备点拾取制度系统
+## Notes-ruRU: Очки Усилий/Система добычи Очков Снаряжения
 ## Author: Roadblock
 ## X-Website: https://github.com/davedehaan/shootyepgp/releases/latest
 ## X-Category: Guild
